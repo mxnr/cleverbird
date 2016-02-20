@@ -34,6 +34,14 @@ framework:
     http_method_override: true
     assets: ~
 
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    filters:
+        sass:    ~
+        compass:
+            bin: %bin.compass%
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"

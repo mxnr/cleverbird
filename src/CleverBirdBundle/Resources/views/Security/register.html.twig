@@ -1,0 +1,20 @@
+{% extends '@CleverBird/Layouts/main.html.twig' %}
+{% block title %}Registration{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Registration</h1>
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                {{ form_widget(form) }}
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

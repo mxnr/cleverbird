@@ -46,6 +46,9 @@ assetic:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - bootstrap_3_layout.html.twig
+        - bootstrap_3_horizontal_layout.html.twig
 
 # Doctrine Configuration
 doctrine:
@@ -67,7 +70,19 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        default_entity_manager: default
+        metadata_cache_driver: apc
+        result_cache_driver: apc
+        query_cache_driver: apc
+        connection: default
+        mappings:
+             CleverBirdBundle: { type: annotation, dir: Entity/ }
+        second_level_cache:
+            enabled: true
+            log_enabled: true
+            region_cache_driver: apc
+            region_lock_lifetime: 60
+            region_lifetime: 300
 
 # Swiftmailer Configuration
 swiftmailer:

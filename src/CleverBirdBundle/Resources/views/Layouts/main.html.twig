@@ -5,15 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="Educational platform with an extended contribution option and a lighter version for users from the less developed countries.">
+    <meta name="description"
+          content="Educational platform with an extended contribution option and a lighter version for users from the less developed countries.">
     <meta name="author" content="Dmitry Semenov<moxnrl@gmail.com>">
     {#<link rel="icon" href=""> @todo generate some fav #}
 
     <title>{% block title %}CleverBird platform{% endblock %}</title>
 
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
+
     {% block stylesheets %}
         {% stylesheets filter="compass"
-            'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'
             'bundles/cleverbird/css/styles.sass'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
@@ -22,6 +27,7 @@
 </head>
 
 <body>
+{% include '@CleverBird/Partials/navbar.html.twig' %}
 {% block body %}{% endblock %}
 <div class="container">
     <footer class="footer">
@@ -30,7 +36,9 @@
 </div>
 {% block javascripts %}
     {% javascripts
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
+        'bundles/cleverbird/js/scripts.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

@@ -1,3 +1,19 @@
 clever_bird_homepage:
     path:     /
     defaults: { _controller: CleverBirdBundle:Default:index }
+
+
+registration:
+    path: /registration
+    defaults: { _controller: CleverBirdBundle:Security:register }
+
+login:
+    path: /login
+    defaults: { _controller: CleverBirdBundle:Security:login }
+
+login_check:
+    path: /login_check
+    defaults: { _controller: Cl:Security:loginCheck }
+
+logout:
+    path: /logout

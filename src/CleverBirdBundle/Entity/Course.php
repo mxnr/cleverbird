@@ -4,23 +4,14 @@ namespace CleverBirdBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="categories",indexes={@ORM\Index(name="courses_indexes", columns={"parent_id"})})
+ * @ORM\Table(name="courses",indexes={@ORM\Index(name="courses_indexes", columns={"parent_id"})})
  */
 class Course
 {
-    const DRAFT = 1;
-
-    const FOR_ALL = 2;
-
-    const FOR_ME = 3;
-
-    const INVITE = 4;
-
-    const PAiD = 5;
-
     /**
      * @var int
      *
@@ -47,7 +38,7 @@ class Course
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     protected $image;
 
@@ -59,11 +50,32 @@ class Course
     protected $type;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="smallint", options={"default" = "1"})
+     */
+    protected $accessType;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="datetime")
      */
     private $created;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $startDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $endDate;
 
     /**
      * @var array
@@ -332,5 +344,73 @@ class Course
         $this->image = $image;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAccessType()
+    {
+        return $this->accessType;
+    }
+
+    /**
+     * @param int $accessType
+     *
+     * @return $this
+     */
+    public function setAccessType($accessType)
+    {
+        $this->accessType = $accessType;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|string
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param \DateTime $startDate
+     *
+     * @return $this
+     */
+    public function setStartDate(\DateTime $startDate)
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param \DateTime $endDate
+     *
+     * @return $this
+     */
+    public function setEndDate(\DateTime $endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * @Assert\IsTrue(message = "The start date must be before the end date")
+     */
+    public function isDatesValid()
+    {
+        return $this->startDate < $this->endDate;
     }
 }

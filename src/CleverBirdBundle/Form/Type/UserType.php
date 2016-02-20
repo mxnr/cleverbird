@@ -1,6 +1,6 @@
 <?php
 
-namespace CleverBirdBundle\Form;
+namespace CleverBirdBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

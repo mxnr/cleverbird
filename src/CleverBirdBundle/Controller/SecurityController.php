@@ -3,7 +3,7 @@
 namespace CleverBirdBundle\Controller;
 
 use CleverBirdBundle\Entity\User;
-use CleverBirdBundle\Form\UserType;
+use CleverBirdBundle\Form\Type\UserType;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
 

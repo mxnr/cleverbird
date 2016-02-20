@@ -6,6 +6,10 @@ clever_bird_homepage:
     path:     /
     defaults: { _controller: CleverBirdBundle:Default:index }
 
+courses_list:
+    path: /courses-list
+    defaults: { _controller: CleverBirdBundle:Default:coursesList }
+
 registration:
     path: /registration
     defaults: { _controller: CleverBirdBundle:Security:register }

@@ -1,0 +1,13 @@
+{
+  "name": "cleverbird",
+  "version": "0.0.1",
+  "repository": "https://github.com/mxnr/cleverbird",
+  "license": "AFL-3.0",
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-bower-task": "~0.4.0"
+  }
+}

@@ -4,7 +4,7 @@ namespace CleverBirdBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use CleverBirdBundle\Entity\Course;
-use CleverBirdBundle\Form\CourseType;
+use CleverBirdBundle\Form\Type\CourseType;
 
 /**
  * Course controller.
@@ -19,7 +19,7 @@ class CourseController extends Controller
     public function indexAction()
     {
         return $this->render('CleverBirdBundle:Course:index.html.twig', [
-            'courses' => $this->getRep('CleverBirdBundle:Course')->findAll(),
+            'courses' => $this->getRep('CleverBirdBundle:Course')->findBy([], ['id' => 'desc']),
         ]);
     }
 
@@ -40,7 +40,7 @@ class CourseController extends Controller
             $course->setUser($this->getUser());
             $this->save($course);
 
-            return $this->redirectToRoute('course_show', ['id' => $course->getId()]);
+            return $this->redirectToRoute('course_index');
         }
 
         return $this->render('CleverBirdBundle:Course:new.html.twig', [

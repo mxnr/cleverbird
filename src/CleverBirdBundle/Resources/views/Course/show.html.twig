@@ -5,20 +5,27 @@
             <div class="col-xs-12">
                 <ol class="breadcrumb">
                     <li><a href="{{ path('clever_bird_homepage') }}">Home</a></li>
-                    <li><a href="{{ path('course_index') }}">My Courses</a></li>
+                    <li><a href="{{ path('course_index') }}">Public Courses</a></li>
                     <li class="active">{{ course.name }}</li>
                 </ol>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
-                {{ form_start(delete_form, { 'attr' : {'class': 'pull-right' }}) }}
-                <button type="submit" class="btn btn-default btn-xs btn-danger" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
-                </button>
-                {{ form_end(delete_form) }}
+                {% if course.user == app.user %}
+                    {{ form_start(delete_form, { 'attr' : {'class': 'pull-right' }}) }}
+                    <button type="submit" class="btn btn-default btn-xs btn-danger" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                    </button>
+                    {{ form_end(delete_form) }}
+                {% endif %}
+
                 <h1>{{ course.name }}</h1>
-                <a href="{{ path('course_edit', { 'id': course.id }) }}">Edit</a>
+                <hr/>
+                {% if course.user == app.user %}
+                    <a href="{{ path('course_edit', { 'id': course.id }) }}">Edit</a>
+                {% endif %}
+
                 <p>{{ course.description }}</p>
 
             </div>

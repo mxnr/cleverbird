@@ -1,12 +1,13 @@
 <?php
 
-namespace CleverBirdBundle\Form;
+namespace CleverBirdBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use CleverBirdBundle\Entity\Course;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use CleverBirdBundle\Entity\CourseStatuses;
 
 class CourseType extends AbstractType
 {
@@ -22,13 +23,25 @@ class CourseType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     'Main Statuses' => [
-                        'Draft' => Course::DRAFT,
-                        'Public' => Course::FOR_ALL,
-                        'Private (join by invite)' => Course::INVITE,
+                        'Self-Paced' => CourseStatuses::SELF_PACED,
+                        'Time Driven' => CourseStatuses::TIME_DRIVEN,
+                        'Finished' => CourseStatuses::FINISHED,
                     ],
                 ],
                 'label' => 'Course type',
             ])
+            ->add('accessType', ChoiceType::class, [
+                'choices' => [
+                    'Main Statuses' => [
+                        'Draft' => CourseStatuses::DRAFT,
+                        'Public' => CourseStatuses::FOR_ALL,
+                        'Private (join by invite)' => CourseStatuses::INVITE,
+                    ],
+                ],
+                'label' => 'Course access',
+            ])
+            ->add('startDate', DateTimeType::class, ['years' => range(date('Y'), date('Y')+1)])
+            ->add('endDate', DateTimeType::class, ['years' => range(date('Y'), date('Y')+1)])
             ->add('image')
         ;
     }

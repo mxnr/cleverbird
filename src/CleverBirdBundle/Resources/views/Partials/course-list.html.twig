@@ -1,9 +1,24 @@
 <div class="row">
     {% for course in courses %}
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="panel panel-default">
+        <div class="panel panel-default{% if course.type == 3 %} finished-course{% endif %}">
             <div class="panel-heading">
-                {{ course.type }}
+                {% if course.type == 1 %}
+                    <span class="glyphicon glyphicon-ok-circle"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Self-Paced Course"></span>
+                {% elseif course.type == 2 %}
+                    <span class="glyphicon glyphicon-calendar"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Time Driven Course, starts at {{ course.startDate | date('m/d/y') }}"></span>
+                {% else %}
+                    <span class="glyphicon glyphicon-off"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Finished Course, finished at {{ course.endDate | date('m/d/y') }}"></span>
+                {% endif %}
                 <a href="{{ path('course_show', { 'id': course.id }) }}">{{ course.name }}</a>
             </div>
             <div class="panel-body">{{ course.description }}</div>
@@ -14,6 +29,8 @@
                         <span class="glyphicon glyphicon-pencil"></span> Edit
                     </a>
                 {% endif %}
+                <p>Created: {{ course.created | date('m/d/y') }}</p>
+                <p>Author: {{ course.user.username }}</p>
             </div>
         </div>
     </div>

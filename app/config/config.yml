@@ -41,6 +41,10 @@ assetic:
         sass:    ~
         compass:
             bin: %bin.compass%
+        uglifyjs2:
+            bin: %bin.uglifyjs2%
+        uglifycss:
+            bin: %bin.uglifycss%
 
 # Twig Configuration
 twig:

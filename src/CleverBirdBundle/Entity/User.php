@@ -280,7 +280,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsActive()
     {
@@ -288,7 +288,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param boolean $isActive
+     * @param bool $isActive
      *
      * @return $this
      */

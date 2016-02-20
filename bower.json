@@ -3,6 +3,7 @@
   "version": "0.1",
   "description": "Educational platform with an extended contribution option and a lighter version for users from the less developed countries.",
   "dependencies": {
-    "eonasdan-bootstrap-datetimepicker": "^4.17.37"
+    "eonasdan-bootstrap-datetimepicker": "^4.17.37",
+    "fullcalendar": "^2.6.1"
   }
 }

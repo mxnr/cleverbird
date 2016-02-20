@@ -25,5 +25,10 @@ security:
             http_basic: ~
             provider: user_provider
 
+    access_control:
+        - { path: ^/calendar, roles: ROLE_USER }
+        - { path: ^/course/*, roles: ROLE_USER }
+
+
     encoders:
         CleverBirdBundle\Entity\User: bcrypt

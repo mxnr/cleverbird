@@ -40,8 +40,8 @@ class CourseType extends AbstractType
                 ],
                 'label' => 'Course access',
             ])
-            ->add('startDate', DateTimeType::class, ['years' => range(date('Y'), date('Y')+1)])
-            ->add('endDate', DateTimeType::class, ['years' => range(date('Y'), date('Y')+1)])
+            ->add('startDate', DateTimeType::class, ['years' => range(date('Y'), date('Y') + 1)])
+            ->add('endDate', DateTimeType::class, ['years' => range(date('Y'), date('Y') + 1)])
             ->add('image')
         ;
     }

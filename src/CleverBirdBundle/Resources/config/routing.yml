@@ -10,6 +10,10 @@ courses_list:
     path: /courses-list
     defaults: { _controller: CleverBirdBundle:Default:coursesList }
 
+calendar:
+    path: /calendar
+    defaults: { _controller: CleverBirdBundle:Default:calendar }
+
 registration:
     path: /registration
     defaults: { _controller: CleverBirdBundle:Security:register }

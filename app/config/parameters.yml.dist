@@ -19,3 +19,5 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     bin.compass: /usr/local/bin/compass
+    bin.uglifyjs2: /usr/local/bin/uglifyjs
+    bin.uglifycss: /usr/local/bin/uglifycss

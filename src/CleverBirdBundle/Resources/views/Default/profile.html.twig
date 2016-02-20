@@ -1,0 +1,29 @@
+{% extends '@CleverBird/Layouts/main.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="{{ path('clever_bird_homepage') }}">Home</a></li>
+                    <li>Profiles</li>
+                    <li class="active">Profiles</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="m-top-0">{% if profile.courses %}Teacher{% else %}Student{% endif %} {{ profile.username }}</h1>
+                <img src="{{ profile.avatar }}&size=600" width="300" alt="{{ profile.username }}" />
+            </div>
+        </div>
+        {% if profile.courses %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Courses of the user</h2>
+                </div>
+            </div>
+            {% include '@CleverBird/Partials/course-list.html.twig' with {'courses': profile.courses} %}
+        {% endif %}
+    </div>
+{% endblock %}

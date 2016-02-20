@@ -42,9 +42,10 @@ class DefaultController extends Controller
      */
     public function calendarAction()
     {
-        $color = function($str) {
+        $color = function ($str) {
             $code = dechex(crc32($str));
             $code = substr($code, 0, 6);
+
             return sprintf('#%s', $code);
         };
 
@@ -56,7 +57,7 @@ class DefaultController extends Controller
                 'start' => $course->getStartDate()->format('Y-m-d'),
                 'end' => $course->getEndDate()->format('Y-m-d'),
                 'url' => $this->get('router')->generate('course_show', array('id' => $course->getId())),
-                'backgroundColor' => $color($course->getId())
+                'backgroundColor' => $color($course->getId()),
             ];
         }
 
@@ -64,6 +65,23 @@ class DefaultController extends Controller
             'CleverBirdBundle:Default:calendar.html.twig',
             [
                 'courses' => $data,
+            ]
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function profileAction($id)
+    {
+        $profile = $this->getRep('CleverBirdBundle:User')->findOneBy(['id' => $id]);
+
+        return $this->render(
+            'CleverBirdBundle:Default:profile.html.twig',
+            [
+                'profile' => $profile,
             ]
         );
     }

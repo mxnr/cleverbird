@@ -1,5 +1,12 @@
 {% extends '@CleverBird/Layouts/main.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    'vendor/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css'
+    filter='?uglifycss' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
 {% block body %}
     <div class="container">
         <div class="row">
@@ -34,4 +41,14 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    'vendor/moment/moment.js'
+    'vendor/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js'
+    'bundles/cleverbird/js/course.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

@@ -5,18 +5,29 @@ clever_bird_course:
 clever_bird_homepage:
     path:     /
     defaults: { _controller: CleverBirdBundle:Default:index }
+    methods:   [GET]
 
 courses_list:
     path: /courses-list
     defaults: { _controller: CleverBirdBundle:Default:coursesList }
+    methods:   [GET]
 
 calendar:
     path: /calendar
     defaults: { _controller: CleverBirdBundle:Default:calendar }
+    methods:   [GET]
+
+profile:
+    path: /profile/{id}
+    defaults: { _controller: CleverBirdBundle:Default:profile }
+    requirements:
+        id: \d+
+    methods:   [GET]
 
 registration:
     path: /registration
     defaults: { _controller: CleverBirdBundle:Security:register }
+    methods:   [GET]
 
 login:
     path: /login

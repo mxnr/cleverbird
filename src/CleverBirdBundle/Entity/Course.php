@@ -411,6 +411,9 @@ class Course
      */
     public function isDatesValid()
     {
+        var_dump($this->startDate);
+        var_dump($this->endDate);
+
         return $this->startDate < $this->endDate;
     }
 }

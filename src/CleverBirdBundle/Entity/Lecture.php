@@ -35,16 +35,16 @@ class Lecture
     /**
      * @var string
      *
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="text", type="text")
      */
     private $text;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="datetime", type="datetime")
-     */
-    private $time;
 
     /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="lectures")
@@ -52,6 +52,11 @@ class Lecture
      * @ORM\Cache("NONSTRICT_READ_WRITE")
      */
     private $course;
+
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+    }
 
     /**
      * Get id.
@@ -68,7 +73,7 @@ class Lecture
      *
      * @param string $title
      *
-     * @return Post
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -92,7 +97,7 @@ class Lecture
      *
      * @param string $text
      *
-     * @return Post
+     * @return $this
      */
     public function setText($text)
     {
@@ -112,50 +117,6 @@ class Lecture
     }
 
     /**
-     * Set time.
-     *
-     * @param \DateTime $time
-     *
-     * @return Post
-     */
-    public function setTime($time)
-    {
-        $this->time = $time;
-
-        return $this;
-    }
-
-    /**
-     * Get time.
-     *
-     * @return \DateTime
-     */
-    public function getTime()
-    {
-        return $this->time;
-    }
-
-    /**
-     * @param User $user
-     *
-     * @return Post
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * @return int
      */
     public function getStatus()
@@ -166,11 +127,35 @@ class Lecture
     /**
      * @param bool $status
      *
-     * @return Post
+     * @return $this
      */
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get creation time.
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set creation time.
+     *
+     * @param \DateTime $date
+     *
+     * @return $this
+     */
+    public function setCreated(\DateTime $date)
+    {
+        $this->created = $date;
 
         return $this;
     }

@@ -268,7 +268,7 @@ class User implements UserInterface, \Serializable
      */
     public function getCourses()
     {
-        return $this->courses;
+        return $this->courses->getValues();
     }
 
     /**

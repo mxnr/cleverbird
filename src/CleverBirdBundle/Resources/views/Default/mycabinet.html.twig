@@ -18,6 +18,13 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="teach">
                             <h2>Start to Teach</h2>
+                            <a href="{{ path('course_new') }}"
+                               class="btn btn-primary btn-lg btn-block btn-success">
+                                <span class="glyphicon glyphicon-plus"></span> Create your course
+                            </a>
+                            {% if app.user.courses %}
+                                TODO LIST
+                            {% endif %}
                         </div>
                     </div>
 

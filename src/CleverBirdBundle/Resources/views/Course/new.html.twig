@@ -1,0 +1,30 @@
+{% extends '@CleverBird/Layouts/main.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="{{ path('clever_bird_homepage') }}">Home</a></li>
+                    <li><a href="{{ path('course_index') }}">My Courses</a></li>
+                    <li class="active">Course creation</li>
+                </ol>
+            </div>
+            <div class="col-xs-12">
+
+                <h1>Course creation</h1>
+
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">
+                                <span class="glyphicon glyphicon-ok"></span> Create
+                            </button>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

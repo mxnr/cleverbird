@@ -1,7 +1,10 @@
+clever_bird_course:
+    resource: "@CleverBirdBundle/Resources/config/routing/course.yml"
+    prefix:   /course
+
 clever_bird_homepage:
     path:     /
     defaults: { _controller: CleverBirdBundle:Default:index }
-
 
 registration:
     path: /registration

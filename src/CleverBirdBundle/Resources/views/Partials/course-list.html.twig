@@ -1,0 +1,21 @@
+<div class="row">
+    {% for course in courses %}
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{ course.type }}
+                <a href="{{ path('course_show', { 'id': course.id }) }}">{{ course.name }}</a>
+            </div>
+            <div class="panel-body">{{ course.description }}</div>
+
+            <div class="panel-footer">
+                {% if course.user == app.user %}
+                    <a href="{{ path('course_edit', { 'id': course.id }) }}">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

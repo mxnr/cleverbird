@@ -4,7 +4,6 @@ namespace CleverBirdBundle\Controller;
 
 use CleverBirdBundle\Entity\User;
 use CleverBirdBundle\Form\UserType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,9 +27,7 @@ class SecurityController extends Controller
 
             $this->authenticateUser($user);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $this->save($user);
 
             return $this->redirectToRoute('clever_bird_homepage');
         }

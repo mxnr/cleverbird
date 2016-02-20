@@ -11,7 +11,19 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Course
 {
+    const DRAFT = 1;
+
+    const FOR_ALL = 2;
+
+    const FOR_ME = 3;
+
+    const INVITE = 4;
+
+    const PAiD = 5;
+
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -19,26 +31,50 @@ class Course
     protected $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=100)
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=250)
+     * @var string
+     *
+     * @ORM\Column(type="text")
      */
     protected $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $image;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(type="smallint", options={"default" = "1"})
      */
     protected $type;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var array
+     *
      * @ORM\OneToMany(targetEntity="Course", mappedBy="parent")
      */
     private $children;
 
     /**
+     * @var array
+     *
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
@@ -69,6 +105,7 @@ class Course
         $this->children = new ArrayCollection();
         $this->lectures = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->created = new \DateTime();
     }
 
     /**
@@ -251,5 +288,49 @@ class Course
     public function setTags($tag)
     {
         $this->tags[] = $tag;
+    }
+
+    /**
+     * Get creation time.
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set creation time.
+     *
+     * @param \DateTime $date
+     *
+     * @return $this
+     */
+    public function setCreated(\DateTime $date)
+    {
+        $this->created = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     *
+     * @return $this
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

@@ -1,3 +1,4 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+clever_bird:
+    resource: "@CleverBirdBundle/Resources/config/routing.yml"
+    prefix:   /
+

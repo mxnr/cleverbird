@@ -1,0 +1,3 @@
+clever_bird_homepage:
+    path:     /
+    defaults: { _controller: CleverBirdBundle:Default:index }

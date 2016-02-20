@@ -6,10 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * User.
- *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="CleverBirdBundle\Entity\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken")
@@ -19,6 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface, \Serializable
 {
     /**
+     * @var int
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -26,11 +27,15 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
 
     /**
+     * @var string
+     *
      * @Assert\NotBlank()
      * @Assert\Length(max = 4096)
      */
@@ -40,16 +45,22 @@ class User implements UserInterface, \Serializable
      * The below length depends on the "algorithm" you use for encoding
      * the password, but this works well with bcrypt.
      *
+     * @var string
+     *
      * @ORM\Column(type="string", length=64)
      */
     private $password;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=60, unique=true)
      */
     private $email;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -62,11 +73,20 @@ class User implements UserInterface, \Serializable
     private $title;
 
     /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\Cache("NONSTRICT_READ_WRITE")
+     */
+    protected $courses;
+
+    /**
      * User constructor.
      */
     public function __construct()
     {
         $this->isActive = true;
+        $this->courses = new ArrayCollection();
     }
 
     /**
@@ -241,5 +261,21 @@ class User implements UserInterface, \Serializable
     public function getAvatar()
     {
         return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->getEmail())).'?d=identicon';
+    }
+
+    /**
+     * @return array
+     */
+    public function getCourses()
+    {
+        return $this->courses;
+    }
+
+    /**
+     * @param array $courses
+     */
+    public function setCourses(Course $courses)
+    {
+        $this->courses[] = $courses;
     }
 }

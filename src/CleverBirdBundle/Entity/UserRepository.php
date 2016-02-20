@@ -17,7 +17,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findLatestUsers()
     {
-        $repository = $this->getEntityManager()->getRepository('AuthorBundle:User');
+        $repository = $this->getEntityManager()->getRepository('CleverBirdBundle:User');
 
         $query = $repository->createQueryBuilder('e')
             ->andWhere('e.isActive = true')
@@ -35,7 +35,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findTopUsers()
     {
-        $repository = $this->getEntityManager()->getRepository('AuthorBundle:User');
+        $repository = $this->getEntityManager()->getRepository('CleverBirdBundle:User');
 
         $query = $repository->createQueryBuilder('e')
             ->select('e')

@@ -8,6 +8,10 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('CleverBirdBundle:Default:index.html.twig');
+        if ($this->getUser()) {
+            return $this->render('CleverBirdBundle:Default:mycabinet.html.twig');
+        } else {
+            return $this->render('CleverBirdBundle:Default:index.html.twig');
+        }
     }
 }

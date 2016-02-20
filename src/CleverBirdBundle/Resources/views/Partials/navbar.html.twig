@@ -5,13 +5,19 @@
                 <ul class="nav nav-pills pull-right">
                     {% if app.user %}
                         <li role="presentation">
-                            <a href="#">Create Courses</a>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-education"></span> My Courses
+                            </a>
                         </li>
                         <li role="presentation">
-                            <a href="#">Browse Courses</a>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-book"></span> Public Courses
+                            </a>
                         </li>
                         <li role="presentation">
-                            <a href="#">Calandar</a>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-calendar"></span> Calendar
+                            </a>
                         </li>
                         <li role="presentation" class="dropdown">
                             <a class="dropdown-toggle"
@@ -40,7 +46,9 @@
                     {% endif %}
                 </ul>
             </nav>
+            {#<img src="{{ asset('bundles/cleverbird/img/logo.png') }}" alt="Clever Bird" height="50"/>#}
             <a href="{{ path('clever_bird_homepage') }}">
+
                 <h3 class="text-muted">
                     Clever Bird
                 </h3>

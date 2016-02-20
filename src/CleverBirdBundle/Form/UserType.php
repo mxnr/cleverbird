@@ -34,7 +34,7 @@ class UserType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'CleverBirdBundle\Entity\User',]);
+        $resolver->setDefaults(['data_class' => 'CleverBirdBundle\Entity\User']);
     }
 
     /**

@@ -181,7 +181,7 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        return ['ROLE_USER',];
+        return ['ROLE_USER'];
     }
 
     public function eraseCredentials()
@@ -230,12 +230,11 @@ class User implements UserInterface, \Serializable
         list(
             $this->id,
             $this->username,
-            $this->password,
-        ) = unserialize($serialized);
+            $this->password) = unserialize($serialized);
     }
 
     /**
-     * Gravatar email
+     * Gravatar email.
      *
      * @return string
      */

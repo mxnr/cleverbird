@@ -4,7 +4,7 @@
         <div class="panel panel-default{% if course.type == 3 %} finished-course{% endif %}">
             <div class="panel-heading">
                 {% if course.user == app.user %}
-                    <a href="{{ path('course_edit', { 'id': course.id }) }}" class="btn btn-default btn-xs">
+                    <a href="{{ path('course_edit', { 'id': course.id }) }}">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                 {% endif %}
@@ -26,7 +26,9 @@
                 {% endif %}
                 <a href="{{ path('course_show', { 'id': course.id }) }}">{{ course.name }}</a>
             </div>
-            <div class="panel-body">{{ course.description }}</div>
+            <div class="panel-body">
+                <p>{{ course.description }}</p>
+            </div>
 
             <div class="panel-footer">
                 <div class="row">
@@ -38,6 +40,17 @@
                     <div class="col-xs-9">
                         <a href="{{ path('profile', { 'id': course.user.id }) }}">{{ course.user.username }}</a>
                         <p>Created: {{ course.created | date('m/d/y') }}</p>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="rating">
+                            <div class="btn-group" role="group">
+                                {% for i in 1..5 %}
+                                    <button type="button" class="btn btn-default btn-xs" disabled="disabled">
+                                        <span class="glyphicon glyphicon-star{% if i >= 5 %}-empty{% endif %}"></span>
+                                    </button>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -58,6 +58,10 @@ class CourseController extends Controller
      */
     public function showAction(Course $course)
     {
+        if (!$course) {
+            throw $this->createNotFoundException('This course does not exists!');
+        }
+
         $deleteForm = $this->createDeleteForm($course);
 
         return $this->render('CleverBirdBundle:Course:show.html.twig', [

@@ -3,6 +3,7 @@
 namespace CleverBirdBundle\Controller;
 
 use CleverBirdBundle\Entity\CourseStatuses;
+use CleverBirdBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -74,9 +75,11 @@ class DefaultController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function profileAction($id)
+    public function profileAction(User $profile)
     {
-        $profile = $this->getRep('CleverBirdBundle:User')->findOneBy(['id' => $id]);
+        if (!$profile) {
+            throw $this->createNotFoundException('This user does not exists!');
+        }
 
         return $this->render(
             'CleverBirdBundle:Default:profile.html.twig',

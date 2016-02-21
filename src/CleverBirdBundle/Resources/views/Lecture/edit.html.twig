@@ -1,0 +1,71 @@
+{% extends '@CleverBird/Layouts/main.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+    {% stylesheets
+    'vendor/medium-editor/dist/css/medium-editor.min.css'
+    'vendor/medium-editor/dist/css/themes/default.css'
+    'vendor/medium-editor-insert-plugin/dist/css/medium-editor-insert-plugin.min.css'
+    filter='?uglifycss' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="{{ path('clever_bird_homepage') }}">Home</a></li>
+                <li><a href="{{ path('course_index') }}">My Courses</a></li>
+                <li><a href="{{ path('course_show', {'id': course.id}) }}">{{ course.name }}</a></li>
+                <li class="active">{{ lecture.title }}</li>
+            </ol>
+        </div>
+        <div class="col-xs-12">
+            {{ form_start(delete_form, { 'attr' : {'class': 'pull-right' }}) }}
+            <button type="submit" class="btn btn-default btn-xs btn-danger" aria-label="Left Align">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+            </button>
+            {{ form_end(delete_form) }}
+            <h1>Edit "{{ lecture.title }}"</h1>
+
+            {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                        </button>
+                    </div>
+                </div>
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    'vendor/medium-editor/dist/js/medium-editor.js'
+    'vendor/handlebars/handlebars.runtime.min.js'
+    'vendor/jquery-sortable/source/js/jquery-sortable-min.js'
+
+    'vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js'
+    'vendor/blueimp-file-upload/js/jquery.iframe-transport.js'
+    'vendor/blueimp-file-upload/js/jquery.fileupload.js'
+
+    'vendor/medium-editor-insert-plugin/dist/js/medium-editor-insert-plugin.min.js'
+
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>
+        $(function () {
+            var editor = new MediumEditor('.editable');
+
+            $('.editable').mediumInsert({
+                editor: editor
+            });
+        });
+    </script>
+{% endblock %}

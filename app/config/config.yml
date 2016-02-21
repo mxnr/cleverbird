@@ -55,8 +55,6 @@ twig:
         - bootstrap_3_horizontal_layout.html.twig
     globals:
         disqus_key:
-    exception_controller:  CleverBirdBundle:Exception:showException
-
 
 # Doctrine Configuration
 doctrine:

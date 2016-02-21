@@ -3,7 +3,6 @@
 namespace CleverBirdBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Table()
@@ -85,6 +84,7 @@ class Participants
 
     /**
      * @param User $user
+     *
      * @return $this
      */
     public function setUser(User $user)

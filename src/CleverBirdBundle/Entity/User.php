@@ -248,11 +248,11 @@ class User implements UserInterface, \Serializable
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             $this->id,
             $this->username,
             $this->password,
-        ));
+        ]);
     }
 
     /**
@@ -324,6 +324,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param Participants $participant
+     *
      * @return $this
      */
     public function setParticipants(Participants $participant)
@@ -334,15 +335,16 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Should be changed to raw mysql check
+     * Should be changed to raw mysql check.
      *
      * @param Course $course
+     *
      * @return bool
      */
     public function isEnrolled(Course $course)
     {
         foreach ($this->getParticipants()->getValues() as $participant) {
-            if($participant->getCourse() == $course && $participant->getUser() == $this) {
+            if ($participant->getCourse() == $course && $participant->getUser() == $this) {
                 return true;
             }
         }

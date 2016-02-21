@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="CleverBirdBundle\Entity\TagRepository")
+ * @ORM\Entity()
  * @ORM\Cache("NONSTRICT_READ_WRITE")
  */
 class Tag

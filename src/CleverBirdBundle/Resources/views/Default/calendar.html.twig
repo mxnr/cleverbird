@@ -2,7 +2,7 @@
 {% block stylesheets %}
     {{ parent() }}
     {% stylesheets
-        'vendor/fullcalendar/fullcalendar.css'
+        'vendor/fullcalendar/dist/fullcalendar.css'
     filter='?uglifycss' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -39,7 +39,7 @@
 
     {% javascripts
         'vendor/moment/moment.js'
-        'vendor/fullcalendar/fullcalendar.js'
+        'vendor/fullcalendar/dist/fullcalendar.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

@@ -11,12 +11,12 @@ abstract class ApplicationExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             $this->getName() => new \Twig_SimpleFunction(
                 $this->getName(),
-                array($this, 'getHtml'),
-                array('is_safe' => array('html'))
+                [$this, 'getHtml'],
+                ['is_safe' => ['html']]
             ),
-        );
+        ];
     }
 }

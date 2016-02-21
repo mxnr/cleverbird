@@ -57,7 +57,7 @@ class DefaultController extends Controller
                 'title' => $course->getName(),
                 'start' => $course->getStartDate()->format('Y-m-d'),
                 'end' => $course->getEndDate()->format('Y-m-d'),
-                'url' => $this->get('router')->generate('course_show', array('id' => $course->getId())),
+                'url' => $this->get('router')->generate('course_show', ['id' => $course->getId()]),
                 'backgroundColor' => $color($course->getId()),
             ];
         }

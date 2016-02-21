@@ -28,9 +28,18 @@ class Lecture
     private $title;
 
     /**
+     * @var int
+     *
      * @ORM\Column(type="smallint", options={"default" = "1"})
      */
-    private $status;
+    private $type;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="smallint", options={"default" = "1"})
+     */
+    protected $accessType;
 
     /**
      * @var string
@@ -48,7 +57,7 @@ class Lecture
 
     /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="lectures")
-     * @ORM\OrderBy({"name" = "ASC"})
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
      * @ORM\Cache("NONSTRICT_READ_WRITE")
      */
     private $course;
@@ -117,26 +126,6 @@ class Lecture
     }
 
     /**
-     * @return int
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param bool $status
-     *
-     * @return $this
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
      * Get creation time.
      *
      * @return \DateTime
@@ -158,5 +147,73 @@ class Lecture
         $this->created = $date;
 
         return $this;
+    }
+
+    /**
+     * @return Course
+     */
+    public function getCourse()
+    {
+        return $this->course;
+    }
+
+    /**
+     * @param Course $course
+     *
+     * @return $this
+     */
+    public function setCourse(Course $course)
+    {
+        $this->course = $course;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAccessType()
+    {
+        return $this->accessType;
+    }
+
+    /**
+     * @param int $accessType
+     *
+     * @return $this
+     */
+    public function setAccessType($accessType)
+    {
+        $this->accessType = $accessType;
+
+        return $this;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function canEdit(User $user)
+    {
+        return true;
     }
 }

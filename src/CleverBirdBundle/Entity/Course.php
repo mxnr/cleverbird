@@ -430,6 +430,7 @@ class Course
 
     /**
      * @param Participants $participants
+     *
      * @return $this
      */
     public function setParticipants(Participants $participants)

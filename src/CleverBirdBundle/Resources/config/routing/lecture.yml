@@ -1,0 +1,19 @@
+course_lecture_show:
+    path:     /{id}/show
+    defaults: { _controller: "CleverBirdBundle:Lecture:show" }
+    methods:  GET
+
+course_lecture_new:
+    path:     /new
+    defaults: { _controller: "CleverBirdBundle:Lecture:new" }
+    methods:  [GET, POST]
+
+course_lecture_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CleverBirdBundle:Lecture:edit" }
+    methods:  [GET, POST]
+
+course_lecture_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CleverBirdBundle:Lecture:delete" }
+    methods:  DELETE

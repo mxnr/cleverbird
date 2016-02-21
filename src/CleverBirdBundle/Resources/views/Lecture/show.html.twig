@@ -1,0 +1,91 @@
+{% extends '@CleverBird/Layouts/main.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="{{ path('clever_bird_homepage') }}">Home</a></li>
+                <li><a href="{{ path('courses_list') }}">Courses list</a></li>
+                <li><a href="{{ path('course_show', {'id': course.id}) }}">{{ course.name }}</a></li>
+                <li class="active">{{ lecture.title }}</li>
+            </ol>
+        </div>
+        <div class="col-xs-12">
+            {% if course.user == app.user %}
+                {{ form_start(delete_form, { 'attr' : {'class': 'pull-right' }}) }}
+                    <button type="submit" class="btn btn-default btn-xs btn-danger" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                    </button>
+                {{ form_end(delete_form) }}
+            {% endif %}
+
+            <h1>{{ lecture.title }}</h1>
+            <hr/>
+            <p class="text-muted">
+                {% if lecture.canEdit(app.user) %}
+                    <a href="{{ path('course_lecture_edit', { 'id': lecture.id, 'courseId': course.id }) }}">Edit</a>
+                {% endif %}
+                {% if course.participants.values > 0 %}
+                    <span class="label label-info">
+                        <span class="glyphicon glyphicon-user"></span> {{ course.participants.values|length }}
+                    </span>
+                {% endif %}
+                <span class="label label-default">{{ lecture.created | date }}</span>
+            </p>
+
+            <div class="lecture-text">
+                {% autoescape 'html' %}
+                    {{ lecture.text | raw }}
+                {% endautoescape %}
+                <hr/>
+            </div>
+            <div class="col-xs-12">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    {% if prev %}
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-info" href="{{ path('course_lecture_show', { 'id': prev.id, 'courseId': course.id }) }}">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Previous Lecture
+                            </a>
+                        </div>
+                    {% endif %}
+                    {% if next %}
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-info" href="{{ path('course_lecture_show', { 'id': next.id, 'courseId': course.id }) }}">
+                                Next Lecture <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+                <hr/>
+            </div>
+            <div class="col-xs-12">
+                <h2>Lecture comments</h2>
+                <hr/>
+            </div>
+            <div class="col-xs-12">
+                <div id="disqus_thread"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+
+    <script>
+        var disqus_config = function () {
+            this.page.remote_auth_s3 = '{{ disqus_hash(app.user) }}';
+            this.page.api_key = '{{ disqus_key }}';
+            this.page.url = '{{ path('course_show', { 'id': course.id }) }}'';
+            this.page.identifier = {{ course.id }};
+        };
+    </script>
+
+    {% javascripts
+    'bundles/cleverbird/js/disqus.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

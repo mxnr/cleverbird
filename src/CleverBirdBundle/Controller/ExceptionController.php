@@ -21,7 +21,11 @@ class ExceptionController extends Controller
         }
 
         return $this->render(
-            '@CleverBird/Exception/error.html.twig', ['title' => $title]
+            '@CleverBird/Exception/error.html.twig',
+            [
+                'title' => $title,
+                'message' => $exception->getMessage(),
+            ]
         );
     }
 }

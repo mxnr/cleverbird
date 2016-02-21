@@ -2,6 +2,12 @@ clever_bird_course:
     resource: "@CleverBirdBundle/Resources/config/routing/course.yml"
     prefix:   /course
 
+clever_bird_course_lecture:
+    resource: "@CleverBirdBundle/Resources/config/routing/lecture.yml"
+    prefix:   /course/{courseId}/lecture
+    requirements:
+        courseId: \d+
+
 clever_bird_homepage:
     path:     /
     defaults: { _controller: CleverBirdBundle:Default:index }

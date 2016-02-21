@@ -21,11 +21,13 @@
                 {% endif %}
 
                 <h1>{{ course.name }}</h1>
-                <hr/>
                 <p class="text-muted">
+                    {% if course.user == app.user %}
+                        <a href="{{ path('course_edit', { 'id': course.id }) }}">Edit</a>
+                    {% endif %}
                     <span class="label label-primary">
-                        {% include '@CleverBird/Partials/course-status.html.twig' %}
-                    </span>
+                            {% include '@CleverBird/Partials/course-status.html.twig' %}
+                        </span>
                     {% if course.participants.values > 0 %}
                         <span class="label label-info">
                             <span class="glyphicon glyphicon-user"></span> {{ course.participants.values|length }}
@@ -33,13 +35,35 @@
                     {% endif %}
                     <span class="label label-default">{{ course.created | date }}</span>
                 </p>
-                {% if course.user == app.user %}
-                    <a href="{{ path('course_edit', { 'id': course.id }) }}">Edit</a>
-                {% endif %}
-
-                <p>{{ course.description }}</p>
-
+                <hr/>
+                <div class="row">
+                    {% if course.lectures %}
+                    <div class="col-xs-12 col-md-4">
+                        <ul class="list-group">
+                            {% for lecture in course.lectures %}
+                            <li class="list-group-item">
+                                {% if app.user.enrolled(course) %}
+                                <a href="{{ path('course_lecture_show', {'id': lecture.id, 'courseId': course.id}) }}">{{ lecture.title }}</a>
+                                {% else %}
+                                    <a href="#"
+                                       data-toggle="tooltip"
+                                       data-placement="right"
+                                       title="You should first enroll to this course to see lecture content."
+                                    >{{ lecture.title }}</a>
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        <p>{{ course.description }}</p>
+                    </div>
+                    {% else %}
+                        <p>{{ course.description }}</p>
+                    {% endif %}
+                </div>
             </div>
+
             {% if not app.user.enrolled(course) %}
             <div class="col-xs-12">
                 <a href="{{ path('course_enroll', { 'id': course.id }) }}" class="btn btn-success btn-large">

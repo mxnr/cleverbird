@@ -2,7 +2,7 @@
 {% block stylesheets %}
     {{ parent() }}
     {% stylesheets
-    'vendor/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css'
+    'vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
     filter='?uglifycss' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -46,7 +46,7 @@
     {{ parent() }}
     {% javascripts
     'vendor/moment/moment.js'
-    'vendor/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js'
+    'vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
     'bundles/cleverbird/js/course.js'
     %}
     <script src="{{ asset_url }}"></script>

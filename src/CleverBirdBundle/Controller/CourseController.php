@@ -41,6 +41,11 @@ class CourseController extends Controller
             $course->setUser($this->getUser());
             $this->save($course);
 
+            $this->addFlash(
+                'success',
+                sprintf('New course "%s" successfully created!', $course->getName())
+            );
+
             return $this->redirectToRoute('course_index');
         }
 
@@ -70,7 +75,7 @@ class CourseController extends Controller
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-    
+
     public function enrollAction(Course $course)
     {
         if (!$course) {
@@ -119,6 +124,11 @@ class CourseController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->save($course);
 
+            $this->addFlash(
+                'success',
+                sprintf('Course "%s" successfully edited!', $course->getName())
+            );
+
             return $this->redirectToRoute('course_index');
         }
 
@@ -144,6 +154,11 @@ class CourseController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->delete($course);
+
+            $this->addFlash(
+                'success',
+                sprintf('Course "%s" successfully deleted!', $course->getName())
+            );
         }
 
         return $this->redirectToRoute('course_index');

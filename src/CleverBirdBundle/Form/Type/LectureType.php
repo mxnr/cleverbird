@@ -28,7 +28,7 @@ class LectureType extends AbstractType
             ->add('accessType', ChoiceType::class, [
                 'choices' => [
                     'No one can\'t contribute' => LectureStatuses::NO_ONE,
-                    'Only users from your group' => LectureStatuses::GROUP_CONTRIBUTE,
+                    'Only users from your Group' => LectureStatuses::GROUP_CONTRIBUTE,
                     'All users' => LectureStatuses::ALL_CONTRIBUTE,
                 ],
                 'label' => 'Contribution type',

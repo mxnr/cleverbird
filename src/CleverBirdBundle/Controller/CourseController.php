@@ -161,6 +161,10 @@ class CourseController extends Controller
      */
     public function deleteAction(Request $request, Course $course)
     {
+        if ($course->getUser() != $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $form = $this->createDeleteForm($course);
         $form->handleRequest($request);
 

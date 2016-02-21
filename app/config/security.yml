@@ -28,6 +28,7 @@ security:
     access_control:
         - { path: ^/calendar, roles: ROLE_USER }
         - { path: ^/course/*, roles: ROLE_USER }
+        - { path: ^/group/*, roles: ROLE_USER }
 
 
     encoders:

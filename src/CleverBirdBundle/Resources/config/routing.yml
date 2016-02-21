@@ -8,6 +8,10 @@ clever_bird_course_lecture:
     requirements:
         courseId: \d+
 
+clever_bird_group:
+        resource: "@CleverBirdBundle/Resources/config/routing/group.yml"
+        prefix:   /group
+
 clever_bird_homepage:
     path:     /
     defaults: { _controller: CleverBirdBundle:Default:index }

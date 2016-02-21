@@ -26,6 +26,10 @@ class LectureController extends Controller
      */
     public function showAction(Lecture $lecture)
     {
+        if (!$lecture) {
+            throw $this->createNotFoundException('This lecture does not exists!');
+        }
+
         $course = $this->getCourse();
         $deleteForm = $this->createDeleteForm($lecture, $course);
 
@@ -39,7 +43,7 @@ class LectureController extends Controller
             'prev' => $prev,
             'course' => $course,
             'lecture' => $lecture,
-            'delete_lecture_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ]);
     }
 
@@ -136,6 +140,10 @@ class LectureController extends Controller
      */
     public function deleteAction(Request $request, Lecture $lecture)
     {
+        if ($lecture->getCourse()->getUser() != $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $course = $this->getCourse();
         $form = $this->createDeleteForm($lecture, $course);
         $form->handleRequest($request);

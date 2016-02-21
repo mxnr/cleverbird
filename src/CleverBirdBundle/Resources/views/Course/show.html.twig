@@ -28,10 +28,18 @@
                         </a>
                     {% endif %}
                 </h1>
-                <p class="text-muted">
+                <p>
+                    <span>
+                        <a href="{{ path('profile', { 'id': course.user.id }) }}">
+                            <img src="{{ course.user.avatar }}&s=80" width="40" height="40" alt="{{ course.user.username }}"/>
+                        </a>
+                        <a href="{{ path('profile', { 'id': course.user.id }) }}" class="author-name">
+                            {{- course.user.username -}}
+                        </a>
+                    </span>
                     <span class="label label-primary">
-                            {% include '@CleverBird/Partials/course-status.html.twig' %}
-                        </span>
+                        {% include '@CleverBird/Partials/course-status.html.twig' %}
+                    </span>
                     {% if course.participants.values > 0 %}
                         <a href="{{ path('course_participants', {'id': course.id}) }}">
                             <span class="label label-info">
@@ -45,20 +53,21 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-4">
                         {% if course.lectures|length > 0 %}
-                            {% if app.user.enrolled(course) %}
-                                <ul class="list-group">
-                                    {% for lecture in course.lectures %}
+                            <ul class="list-group">
+                                {% for lecture in course.lectures %}
+                                    {% if app.user.enrolled(course) %}
                                         <a href="{{ path('course_lecture_show', {'id': lecture.id, 'courseId': course.id}) }}"
                                            class="list-group-item">{{ lecture.title }}</a>
-                                    {% endfor %}
-                                </ul>
-                            {% else %}
-                                <a href="#"
-                                   data-toggle="tooltip"
-                                   data-placement="right"
-                                   title="You should first enroll to this course to see lecture content."
-                                >{{ lecture.title }}</a>
-                            {% endif %}
+                                    {% else %}
+                                        <a href="#"
+                                           class="list-group-item"
+                                           data-toggle="tooltip"
+                                           data-placement="right"
+                                           title="You should first enroll to this course to see lecture content."
+                                        >{{ lecture.title }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
                         {% endif %}
                         <a href="{{ path('course_lecture_new', { 'courseId': course.id }) }}"
                            class="btn btn-default btn-block">

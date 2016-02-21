@@ -94,6 +94,20 @@ class User implements UserInterface, \Serializable
     protected $participants;
 
     /**
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
+     */
+    protected $groups;
+
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Group", mappedBy="owner")
+     */
+    protected $owned_groups;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -101,6 +115,7 @@ class User implements UserInterface, \Serializable
         $this->active = true;
         $this->courses = new ArrayCollection();
         $this->participants = new ArrayCollection();
+        $this->groups = new ArrayCollection();
         $this->joinDate = new \DateTime();
     }
 
@@ -358,5 +373,44 @@ class User implements UserInterface, \Serializable
     public function getJoinDate()
     {
         return $this->joinDate;
+    }
+
+    /**
+     * @return array
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param Group $group
+     *
+     * @return $this
+     */
+    public function setGroups(Group $group)
+    {
+        $this->groups[] = $group;
+
+        return $this;
+    }
+
+    public function hasGroup(Group $group)
+    {
+        foreach ($this->getGroups()->getValues() as $userGroup) {
+            if ($group == $userGroup) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOwnedGroups()
+    {
+        return $this->owned_groups;
     }
 }

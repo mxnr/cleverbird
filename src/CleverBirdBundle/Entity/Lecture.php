@@ -214,6 +214,17 @@ class Lecture
      */
     public function canEdit(User $user)
     {
-        return true;
+        if ($this->getCourse()->getUser() == $user) {
+            return true;
+        } elseif ($this->getAccessType() == LectureStatuses::ALL_CONTRIBUTE) {
+            return true;
+        } elseif (
+            $this->getAccessType() == LectureStatuses::GROUP_CONTRIBUTE
+            && $this->getCourse()->getUser()->getGroups() == $user->getGroups()
+        ) {
+            return true;
+        }
+
+        return false;
     }
 }

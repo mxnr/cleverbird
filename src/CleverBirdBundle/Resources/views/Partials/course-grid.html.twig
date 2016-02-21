@@ -14,6 +14,9 @@
                             <a href="{{ path('course_edit', { 'id': course.id }) }}">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
+                            <a href="{{ path('course_lecture_new', { 'courseId': course.id }) }}">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
                         {% endif %}
                         <span class="label label-default pull-right">
                             {% include '@CleverBird/Partials/course-status.html.twig' %}

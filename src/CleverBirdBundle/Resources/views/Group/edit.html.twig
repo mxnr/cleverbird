@@ -1,0 +1,30 @@
+{% extends '@CleverBird/Layouts/main.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="{{ path('clever_bird_homepage') }}">Home</a></li>
+                <li><a href="{{ path('profile', {'id': app.user.id}) }}">My profile</a></li>
+                <li><a href="{{ path('group_index') }}">My Groups list</a></li>
+                <li class="active">Group edit</li>
+            </ol>
+        </div>
+        <div class="col-xs-12">
+            <h1>Group edit</h1>
+
+            {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                        </button>
+                    </div>
+                </div>
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

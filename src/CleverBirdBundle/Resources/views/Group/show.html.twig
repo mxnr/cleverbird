@@ -1,0 +1,49 @@
+{% extends '@CleverBird/Layouts/main.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="{{ path('clever_bird_homepage') }}">Home</a></li>
+                <li><a href="{{ path('profile', {'id': app.user.id}) }}">My profile</a></li>
+                <li><a href="{{ path('group_index') }}">My Groups list</a></li>
+                <li class="active">Group "{{ group.name }}"</li>
+            </ol>
+        </div>
+        <div class="col-xs-12">
+            <h1>Group "{{ group.name }}"</h1>
+
+            {% if group.users|length > 0 %}
+                <table class="table table-bordered table-responsive table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in group.users %}
+                        <tr>
+                            <td><a href="{{ path('profile', { 'id': group.id }) }}">{{ user.username }}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-info">
+                    This group does'nt have any users. <a href="mailto:{{ group.user.email }}">Message the owner</a>, and ask to add your user!
+                </div>
+            {% endif %}
+            {% if not app.user.hasGroup(group) %}
+                <div class="col-xs-12">
+                    <hr/>
+                    <a href="{{ path('group_join', { 'id': group.id }) }}" class="btn btn-success btn-large btn-block">
+                        <span class="glyphicon glyphicon-plus"></span> Join group right now!
+                    </a>
+                    <hr/>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

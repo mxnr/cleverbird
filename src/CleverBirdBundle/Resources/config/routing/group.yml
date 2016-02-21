@@ -1,0 +1,29 @@
+group_index:
+    path:     /
+    defaults: { _controller: "CleverBirdBundle:Group:index" }
+    methods:  GET
+
+group_show:
+    path:     /{id}/show
+    defaults: { _controller: "CleverBirdBundle:Group:show" }
+    methods:  GET
+
+group_join:
+    path:     /{id}/join
+    defaults: { _controller: "CleverBirdBundle:Group:join" }
+    methods:  GET
+
+group_new:
+    path:     /new
+    defaults: { _controller: "CleverBirdBundle:Group:new" }
+    methods:  [GET, POST]
+
+group_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CleverBirdBundle:Group:edit" }
+    methods:  [GET, POST]
+
+group_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CleverBirdBundle:Group:delete" }
+    methods:  DELETE

@@ -1,0 +1,46 @@
+{% extends '@CleverBird/Layouts/main.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="{{ path('clever_bird_homepage') }}">Home</a></li>
+                <li><a href="{{ path('profile', {'id': app.user.id }) }}">My profile</a></li>
+                <li class="active">My Groups list</li>
+            </ol>
+        </div>
+        <div class="col-xs-12">
+            <h1>My Groups list</h1>
+            <hr/>
+            {% if groups|length > 0%}
+                <table class="table table-bordered table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for group in groups %}
+                        <tr>
+                            <td><a href="{{ path('group_show', { 'id': group.id }) }}">{{ group.name }}</a></td>
+                            <td>{% if group.created %}{{ group.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-info">
+                    Currently you didn't have any groups, but you can <a href="{{ path('group_new') }}">create</a> the first one!
+                </div>
+            {% endif %}
+            <a href="{{ path('group_new') }}"
+               class="btn btn-primary btn-lg btn-block btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Create new group
+            </a>
+            <br/>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -61,9 +61,9 @@ class User implements UserInterface, \Serializable
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $isActive;
+    private $active;
 
     /**
      * @var string
@@ -282,9 +282,9 @@ class User implements UserInterface, \Serializable
     /**
      * @return bool
      */
-    public function isIsActive()
+    public function isActive()
     {
-        return $this->isActive;
+        return $this->active;
     }
 
     /**
@@ -292,9 +292,9 @@ class User implements UserInterface, \Serializable
      *
      * @return $this
      */
-    public function setIsActive($isActive)
+    public function setActive($isActive)
     {
-        $this->isActive = $isActive;
+        $this->active = $isActive;
 
         return $this;
     }

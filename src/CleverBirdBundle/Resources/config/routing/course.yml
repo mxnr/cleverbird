@@ -8,6 +8,11 @@ course_show:
     defaults: { _controller: "CleverBirdBundle:Course:show" }
     methods:  GET
 
+course_enroll:
+    path:     /{id}/enroll
+    defaults: { _controller: "CleverBirdBundle:Course:enroll" }
+    methods:  GET
+
 course_new:
     path:     /new
     defaults: { _controller: "CleverBirdBundle:Course:new" }

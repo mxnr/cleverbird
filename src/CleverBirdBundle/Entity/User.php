@@ -59,6 +59,13 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $joinDate;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="active", type="boolean")
@@ -76,17 +83,25 @@ class User implements UserInterface, \Serializable
      * @var array
      *
      * @ORM\OneToMany(targetEntity="Course", mappedBy="user", cascade={"persist", "remove"})
-     * @ORM\Cache("NONSTRICT_READ_WRITE")
      */
     protected $courses;
+
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Participants", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $participants;
 
     /**
      * User constructor.
      */
     public function __construct()
     {
-        $this->isActive = true;
+        $this->active = true;
         $this->courses = new ArrayCollection();
+        $this->participants = new ArrayCollection();
+        $this->joinDate = new \DateTime();
     }
 
     /**
@@ -264,7 +279,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return array
+     * @return ArrayCollection
      */
     public function getCourses()
     {
@@ -297,5 +312,49 @@ class User implements UserInterface, \Serializable
         $this->active = $isActive;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection of Participants
+     */
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
+    /**
+     * @param Participants $participant
+     * @return $this
+     */
+    public function setParticipants(Participants $participant)
+    {
+        $this->participants[] = $participant;
+
+        return $this;
+    }
+
+    /**
+     * Should be changed to raw mysql check
+     *
+     * @param Course $course
+     * @return bool
+     */
+    public function isEnrolled(Course $course)
+    {
+        foreach ($this->getParticipants()->getValues() as $participant) {
+            if($participant->getCourse() == $course && $participant->getUser() == $this) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getJoinDate()
+    {
+        return $this->joinDate;
     }
 }

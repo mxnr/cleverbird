@@ -112,11 +112,17 @@ class Course
      */
     private $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Participants", mappedBy="course")
+     */
+    private $participants;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->lectures = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->participants = new ArrayCollection();
         $this->created = new \DateTime();
     }
 
@@ -412,5 +418,24 @@ class Course
     public function isDatesValid()
     {
         return $this->startDate < $this->endDate;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
+    /**
+     * @param Participants $participants
+     * @return $this
+     */
+    public function setParticipants(Participants $participants)
+    {
+        $this->participants[] = $participants;
+
+        return $this;
     }
 }

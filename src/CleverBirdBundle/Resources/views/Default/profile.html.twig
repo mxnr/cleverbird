@@ -14,15 +14,46 @@
         <div class="row">
             <div class="col-xs-12">
                 <h1 class="m-top-0">{% if profile.courses %}Teacher{% else %}Student{% endif %} {{ profile.username }}</h1>
-                <img src="{{ profile.avatar }}&size=600" width="300" alt="{{ profile.username }}" />
+                <div class="col-xs-12 col-sm-6">
+                    <img src="{{ profile.avatar }}&size=600" width="300" alt="{{ profile.username }}" />
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <p>
+                        Registered on: <span class="label label-default">{{ profile.joinDate }}</span>
+                    </p>
+                    <a href="mailto:{{ profile.email }}" class="btn btn-primary btn-lg btn-block">Send Email to user</a>
+                </div>
             </div>
         </div>
         {% if profile.courses %}
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>Courses of the user</h2>
+                    <hr/>
+                    <h2>Courses of the user:</h2>
                 </div>
             </div>
+            {% include '@CleverBird/Partials/course-list.html.twig' with {'courses': profile.courses} %}
+        {% endif %}
+
+        {% if profile.participants %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <hr/>
+                    <h2>User are trained in:</h2>
+                </div>
+            </div>
+            <table class="table table-bordered table-responsive table-hover">
+                {% for participant in profile.participants %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('course_show', {'id': participant.course.id }) }}">{{ participant.course.name }}</a>
+                        </td>
+                        <td>
+                            <span class="label label-default">{{ participant.joinDate | date }}</span>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
             {% include '@CleverBird/Partials/course-list.html.twig' with {'courses': profile.courses} %}
         {% endif %}
     </div>

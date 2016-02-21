@@ -22,6 +22,17 @@
 
                 <h1>{{ course.name }}</h1>
                 <hr/>
+                <p class="text-muted">
+                    <span class="label label-primary">
+                        {% include '@CleverBird/Partials/course-status.html.twig' %}
+                    </span>
+                    {% if course.participants.values > 0 %}
+                        <span class="label label-info">
+                            <span class="glyphicon glyphicon-user"></span> {{ course.participants.values|length }}
+                        </span>
+                    {% endif %}
+                    <span class="label label-default">{{ course.created | date }}</span>
+                </p>
                 {% if course.user == app.user %}
                     <a href="{{ path('course_edit', { 'id': course.id }) }}">Edit</a>
                 {% endif %}
@@ -29,6 +40,14 @@
                 <p>{{ course.description }}</p>
 
             </div>
+            {% if not app.user.enrolled(course) %}
+            <div class="col-xs-12">
+                <a href="{{ path('course_enroll', { 'id': course.id }) }}" class="btn btn-success btn-large">
+                    <span class="glyphicon glyphicon-plus"></span> Enroll to this Course right now!
+                </a>
+                <hr/>
+            </div>
+            {% endif %}
             <div class="col-xs-12">
                 <h2>Course comments</h2>
                 <hr/>

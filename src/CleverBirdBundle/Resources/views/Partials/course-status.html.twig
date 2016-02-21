@@ -1,0 +1,16 @@
+{% if course.type == 1 %}
+    <span class="glyphicon glyphicon-ok-circle"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Self-Paced Course"></span>
+{% elseif course.type == 2 %}
+    <span class="glyphicon glyphicon-calendar"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Time Driven Course, starts at {{ course.startDate | date('m/d/y') }}"></span>
+{% else %}
+    <span class="glyphicon glyphicon-off"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Finished Course, finished at {{ course.endDate | date('m/d/y') }}"></span>
+{% endif %}

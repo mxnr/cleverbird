@@ -29,6 +29,32 @@
                 <p>{{ course.description }}</p>
 
             </div>
+            <div class="col-xs-12">
+                <h2>Course comments</h2>
+                <hr/>
+            </div>
+            <div class="col-xs-12">
+                <div id="disqus_thread"></div>
+            </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+
+    <script>
+        var disqus_config = function () {
+            this.page.remote_auth_s3 = '{{ disqus_hash(app.user) }}';
+            this.page.api_key = '{{ disqus_key }}';
+            this.page.url = '{{ path('course_show', { 'id': course.id }) }}'';
+            this.page.identifier = {{ course.id }};
+        };
+    </script>
+
+    {% javascripts
+        'bundles/cleverbird/js/disqus.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

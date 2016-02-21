@@ -27,7 +27,7 @@ profile:
 registration:
     path: /registration
     defaults: { _controller: CleverBirdBundle:Security:register }
-    methods:   [GET]
+    methods:   [GET, POST]
 
 login:
     path: /login

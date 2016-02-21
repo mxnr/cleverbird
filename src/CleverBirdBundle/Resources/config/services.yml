@@ -1,4 +1,6 @@
 services:
-#    clever_bird.example:
-#        class: CleverBirdBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    disqus_hash:
+        class: CleverBirdBundle\Twig\Disqus
+        arguments: [%disqus.private_key%]
+        tags:
+            - { name: twig.extension }

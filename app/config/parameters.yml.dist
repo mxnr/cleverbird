@@ -18,6 +18,11 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+    # Bin paths, used in assets
     bin.compass: /usr/local/bin/compass
     bin.uglifyjs2: /usr/local/bin/uglifyjs
     bin.uglifycss: /usr/local/bin/uglifycss
+
+    # Disqus
+    disqus.public_key: PUBLIC_KEY
+    disqus.private_key: PRIVATE_KEY

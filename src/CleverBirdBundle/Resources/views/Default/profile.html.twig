@@ -1,5 +1,13 @@
 {% extends '@CleverBird/Layouts/main.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
 
+    {% stylesheets filter="compass"
+    'bundles/cleverbird/css/courses-tiles.sass'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
 {% block body %}
     <div class="container">
         <div class="row">
@@ -19,7 +27,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <p>
-                        Registered on: <span class="label label-default">{{ profile.joinDate }}</span>
+                        Registered on: <span class="label label-default">{{ profile.joinDate | date }}</span>
                     </p>
                     <a href="mailto:{{ profile.email }}" class="btn btn-primary btn-lg btn-block">Send Email to user</a>
                 </div>
@@ -32,7 +40,9 @@
                     <h2>Courses of the user:</h2>
                 </div>
             </div>
-            {% include '@CleverBird/Partials/course-list.html.twig' with {'courses': profile.courses} %}
+        </div>
+            {% include '@CleverBird/Partials/course-grid.html.twig' with {'courses': profile.courses} %}
+        <div class="container">
         {% endif %}
 
         {% if profile.participants %}
@@ -54,7 +64,19 @@
                     </tr>
                 {% endfor %}
             </table>
-            {% include '@CleverBird/Partials/course-list.html.twig' with {'courses': profile.courses} %}
+        </div>
+        {% include '@CleverBird/Partials/course-grid.html.twig' with {'courses': profile.courses} %}
+        <div class="container">
         {% endif %}
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    'vendor/masonry/dist/masonry.pkgd.min.js'
+    'bundles/cleverbird/js/courses-tiles.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

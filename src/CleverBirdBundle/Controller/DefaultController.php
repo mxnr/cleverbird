@@ -55,7 +55,7 @@ class DefaultController extends Controller
         if ($showMy) {
             $courses = [];
             if ($this->getUser()->getParticipants()) {
-                foreach($this->getUser()->getParticipants() as $participant) {
+                foreach ($this->getUser()->getParticipants() as $participant) {
                     $courses[] = $participant->getCourse();
                 }
             }

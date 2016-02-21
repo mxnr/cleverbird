@@ -1,0 +1,63 @@
+<div class="grid-container container">
+    <div class="grid">
+        {% for course in courses %}
+            <div class="grid-item">
+                <div class="grid-panel{% if course.type == 3 %} finished-course{% endif %}">
+                    <div class="grid-panel-header-author">
+                        <a href="{{ path('profile', { 'id': course.user.id }) }}">
+                            <img src="{{ course.user.avatar }}&s=80" width="40" height="40" alt="{{ course.user.username }}"/>
+                        </a>
+                        <a href="{{ path('profile', { 'id': course.user.id }) }}" class="author-name">
+                            {{- course.user.username -}}
+                        </a>
+                        {% if course.user == app.user %}
+                            <a href="{{ path('course_edit', { 'id': course.id }) }}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        {% endif %}
+                        <span class="label label-default pull-right">
+                            {% include '@CleverBird/Partials/course-status.html.twig' %}
+                        </span>
+                    </div>
+                    <div class="grid-panel-header">
+                        <a href="{{ path('course_show', { 'id': course.id }) }}">
+                            <h3>{{ course.name }}</h3>
+                        </a>
+                    </div>
+                    <div class="grid-panel-body">
+                        <p>{{ course.description }}</p>
+                    </div>
+                    {% if course.image %}
+                    <div class="grid-panel-image">
+                        <img src="{{ course.image }}" alt="{{ course.name }}" />
+                    </div>
+                    {% endif %}
+                    <div class="grid-panel-footer">
+                        {% if course.lectures|length > 0 %}
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('course_show', { 'id': course.id }) }}"
+                               role="button"
+                            >
+                                <span class="glyphicon glyphicon-book"></span> {{ course.lectures|length }}
+                            </a>
+                        {% endif %}
+
+                        {% if course.participants|length > 0 %}
+                            <a class="btn btn-default btn-xs" href="#" role="button">
+                                <span class="glyphicon glyphicon-user"></span> {{ course.participants|length }}
+                            </a>
+                        {% endif %}
+
+                        <a class="btn btn-default pull-right btn-xs"
+                           href="{{ path('course_show', { 'id': course.id }) }}#disqus_thread"
+                           role="button">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                            <span class="disqus-comment-count"
+                                  data-disqus-url="{{ path('course_show', { 'id': course.id }) }}"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

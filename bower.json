@@ -6,6 +6,7 @@
     "eonasdan-bootstrap-datetimepicker": "^4.17.37",
     "fullcalendar": "^2.6.1",
     "medium-editor-insert-plugin": "^2.1",
-    "blueimp-file-upload": "^9.11.2"
+    "blueimp-file-upload": "^9.11.2",
+    "masonry": "^4.0.0"
   }
 }

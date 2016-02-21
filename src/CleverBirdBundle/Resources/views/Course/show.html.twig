@@ -20,57 +20,65 @@
                     {{ form_end(delete_form) }}
                 {% endif %}
 
-                <h1>{{ course.name }}</h1>
-                <p class="text-muted">
+                <h1>
+                    {{- course.name -}}
                     {% if course.user == app.user %}
-                        <a href="{{ path('course_edit', { 'id': course.id }) }}">Edit</a>
+                        <a href="{{ path('course_edit', { 'id': course.id }) }}" class="btn btn-default">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                        </a>
                     {% endif %}
+                </h1>
+                <p class="text-muted">
                     <span class="label label-primary">
                             {% include '@CleverBird/Partials/course-status.html.twig' %}
                         </span>
                     {% if course.participants.values > 0 %}
-                        <span class="label label-info">
-                            <span class="glyphicon glyphicon-user"></span> {{ course.participants.values|length }}
-                        </span>
+                        <a href="{{ path('course_participants', {'id': course.id}) }}">
+                            <span class="label label-info">
+                                <span class="glyphicon glyphicon-user"></span> {{ course.participants.values|length }}
+                            </span>
+                        </a>
                     {% endif %}
                     <span class="label label-default">{{ course.created | date }}</span>
                 </p>
                 <hr/>
                 <div class="row">
-                    {% if course.lectures %}
                     <div class="col-xs-12 col-md-4">
-                        <ul class="list-group">
-                            {% for lecture in course.lectures %}
-                            <li class="list-group-item">
-                                {% if app.user.enrolled(course) %}
-                                <a href="{{ path('course_lecture_show', {'id': lecture.id, 'courseId': course.id}) }}">{{ lecture.title }}</a>
-                                {% else %}
-                                    <a href="#"
-                                       data-toggle="tooltip"
-                                       data-placement="right"
-                                       title="You should first enroll to this course to see lecture content."
-                                    >{{ lecture.title }}</a>
-                                {% endif %}
-                            </li>
-                            {% endfor %}
-                        </ul>
+                        {% if course.lectures|length > 0 %}
+                            {% if app.user.enrolled(course) %}
+                                <ul class="list-group">
+                                    {% for lecture in course.lectures %}
+                                        <a href="{{ path('course_lecture_show', {'id': lecture.id, 'courseId': course.id}) }}"
+                                           class="list-group-item">{{ lecture.title }}</a>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <a href="#"
+                                   data-toggle="tooltip"
+                                   data-placement="right"
+                                   title="You should first enroll to this course to see lecture content."
+                                >{{ lecture.title }}</a>
+                            {% endif %}
+                        {% endif %}
+                        <a href="{{ path('course_lecture_new', { 'courseId': course.id }) }}"
+                           class="btn btn-default btn-block">
+                            <span class="glyphicon glyphicon-plus"></span> Add new Lecture
+                        </a>
                     </div>
                     <div class="col-xs-12 col-md-8">
-                        <p>{{ course.description }}</p>
+                        <p>{{ course.description | nl2br }}</p>
                     </div>
-                    {% else %}
-                        <p>{{ course.description }}</p>
-                    {% endif %}
                 </div>
             </div>
 
             {% if not app.user.enrolled(course) %}
-            <div class="col-xs-12">
-                <a href="{{ path('course_enroll', { 'id': course.id }) }}" class="btn btn-success btn-large">
-                    <span class="glyphicon glyphicon-plus"></span> Enroll to this Course right now!
-                </a>
-                <hr/>
-            </div>
+                <div class="col-xs-12">
+                    <hr/>
+                    <a href="{{ path('course_enroll', { 'id': course.id }) }}" class="btn btn-success btn-large btn-block">
+                        <span class="glyphicon glyphicon-plus"></span> Enroll to this Course right now!
+                    </a>
+                    <hr/>
+                </div>
             {% endif %}
             <div class="col-xs-12">
                 <h2>Course comments</h2>
@@ -90,7 +98,7 @@
         var disqus_config = function () {
             this.page.remote_auth_s3 = '{{ disqus_hash(app.user) }}';
             this.page.api_key = '{{ disqus_key }}';
-            this.page.url = '{{ path('course_show', { 'id': course.id }) }}'';
+            this.page.url = '{{ url('course_show', { 'id': course.id }) }}';
             this.page.identifier = {{ course.id }};
         };
     </script>

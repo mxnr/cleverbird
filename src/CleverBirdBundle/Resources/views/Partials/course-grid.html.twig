@@ -11,10 +11,18 @@
                             {{- course.user.username -}}
                         </a>
                         {% if course.user == app.user %}
-                            <a href="{{ path('course_edit', { 'id': course.id }) }}">
+                            <a href="{{ path('course_edit', { 'id': course.id }) }}"
+                               class="btn btn-default btn-xs"
+                               data-toggle="tooltip"
+                               data-placement="bottom"
+                               title="Edit course">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
-                            <a href="{{ path('course_lecture_new', { 'courseId': course.id }) }}">
+                            <a href="{{ path('course_lecture_new', { 'courseId': course.id }) }}"
+                               class="btn btn-default btn-xs"
+                               data-toggle="tooltip"
+                               data-placement="bottom"
+                               title="Add new lecture">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
                         {% endif %}

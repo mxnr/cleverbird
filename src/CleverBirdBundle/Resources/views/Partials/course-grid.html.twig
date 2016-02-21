@@ -46,7 +46,9 @@
                         {% endif %}
 
                         {% if course.participants|length > 0 %}
-                            <a class="btn btn-default btn-xs" href="#" role="button">
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('course_participants', { 'id': course.id }) }}"
+                               role="button">
                                 <span class="glyphicon glyphicon-user"></span> {{ course.participants|length }}
                             </a>
                         {% endif %}

@@ -25,6 +25,18 @@ class CourseController extends Controller
     }
 
     /**
+     * @param Course $course
+     * 
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function participantsAction(Course $course)
+    {
+        return $this->render('CleverBirdBundle:Course:participants.html.twig', [
+            'course' => $course,
+        ]);
+    }
+
+    /**
      * Creates a new Course entity.
      *
      * @param Request $request

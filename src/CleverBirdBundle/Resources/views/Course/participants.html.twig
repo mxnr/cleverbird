@@ -1,0 +1,47 @@
+{% extends '@CleverBird/Layouts/main.html.twig' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="{{ path('clever_bird_homepage') }}">Home</a></li>
+                <li><a href="{{ path('course_index') }}">Public Courses</a></li>
+                <li><a href="{{ path('course_show', {'id': course.id}) }}">{{ course.name }}</a></li>
+                <li class="active">Participants</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Participants of "{{ course.name }}"</h1>
+            <hr/>
+            {% if course.participants|length > 0 %}
+            <table class="table table-bordered table-responsive table-hover">
+                {% for participant in course.participants %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('profile', {'id': participant.user.id }) }}">{{ participant.user.username }}</a>
+                        </td>
+                        <td>
+                            <span class="label label-default">{{ participant.joinDate | date }}</span>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+                <div class="alert alert-info">
+                    <strong>Heads up!</strong> This course doesn't have any participants.
+                </div>
+            {% endif %}
+            {% if not app.user.enrolled(course) %}
+                <hr/>
+                <div class="col-xs-12">
+                    <a href="{{ path('course_enroll', { 'id': course.id }) }}" class="btn btn-success btn-large">
+                        <span class="glyphicon glyphicon-plus"></span> Enroll to this Course right now!
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

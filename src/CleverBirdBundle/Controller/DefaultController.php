@@ -39,9 +39,11 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param $showMy
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function calendarAction()
+    public function calendarAction($showMy)
     {
         $color = function ($str) {
             $code = dechex(crc32($str));
@@ -50,16 +52,28 @@ class DefaultController extends Controller
             return sprintf('#%s', $code);
         };
 
-        $courses = $this->getRep('CleverBirdBundle:Course')->findAll();
+        if ($showMy) {
+            $courses = [];
+            if ($this->getUser()->getParticipants()) {
+                foreach($this->getUser()->getParticipants() as $participant) {
+                    $courses[] = $participant->getCourse();
+                }
+            }
+        } else {
+            $courses = $this->getRep('CleverBirdBundle:Course')->findAll();
+        }
+
         $data = [];
-        foreach ($courses as $course) {
-            $data[] = [
-                'title' => $course->getName(),
-                'start' => $course->getStartDate()->format('Y-m-d'),
-                'end' => $course->getEndDate()->format('Y-m-d'),
-                'url' => $this->get('router')->generate('course_show', ['id' => $course->getId()]),
-                'backgroundColor' => $color($course->getId()),
-            ];
+        if ($courses) {
+            foreach ($courses as $course) {
+                $data[] = [
+                    'title' => $course->getName(),
+                    'start' => $course->getStartDate()->format('Y-m-d'),
+                    'end' => $course->getEndDate()->format('Y-m-d'),
+                    'url' => $this->get('router')->generate('course_show', ['id' => $course->getId()]),
+                    'backgroundColor' => $color($course->getId()),
+                ];
+            }
         }
 
         return $this->render(

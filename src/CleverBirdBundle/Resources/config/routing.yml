@@ -20,7 +20,12 @@ courses_list:
 
 calendar:
     path: /calendar
-    defaults: { _controller: CleverBirdBundle:Default:calendar }
+    defaults: { _controller: CleverBirdBundle:Default:calendar, showMy: 0 }
+    methods:   [GET]
+
+calendar_my:
+    path: /calendar/my
+    defaults: { _controller: CleverBirdBundle:Default:calendar, showMy: 1 }
     methods:   [GET]
 
 profile:

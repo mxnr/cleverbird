@@ -14,17 +14,52 @@
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="learn">
-                            <h2>New Cources</h2>
+                            <h2>My Cources</h2>
+                            <table class="table table-bordered table-responsive table-hover">
+                                {% if app.user.courses %}
+                                    {% for participant in app.user.participants %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path('course_show', {'id': participant.course.id }) }}">{{ participant.course.name }}</a>
+                                            </td>
+                                            <td>
+                                                <span class="label label-default">{{ participant.joinDate | date }}</span>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="alert alert-info">
+                                        <strong>Heads up!</strong> Currently you do not participate in any courses.
+                                    </div>
+                                    <a href="{{ path('courses_list') }}"
+                                       class="btn btn-primary btn-lg btn-block btn-success">
+                                        <span class="glyphicon glyphicon-globe"></span> Find new Courses
+                                    </a>
+                                {% endif %}
+                            </table>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="teach">
                             <h2>Start to Teach</h2>
+                            {% if app.user.courses %}
+                                {% for course in app.user.courses %}
+                                    <tr>
+                                        <td>
+                                            <a href="{{ path('course_show', {'id': course.id }) }}">{{ course.name }}</a>
+                                        </td>
+                                        <td>
+                                            <span class="label label-default">{{ course.created | date }}</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <div class="alert alert-info">
+                                    <strong>Heads up!</strong> Currently you do not create any courses.
+                                </div>
+                            {% endif %}
                             <a href="{{ path('course_new') }}"
                                class="btn btn-primary btn-lg btn-block btn-success">
                                 <span class="glyphicon glyphicon-plus"></span> Create your course
                             </a>
-                            {% if app.user.courses %}
-                                TODO LIST
-                            {% endif %}
                         </div>
                     </div>
 

@@ -40,25 +40,27 @@
                 {% endautoescape %}
                 <hr/>
             </div>
-            <div class="col-xs-12">
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                    {% if prev %}
-                        <div class="btn-group" role="group">
-                            <a class="btn btn-info" href="{{ path('course_lecture_show', { 'id': prev.id, 'courseId': course.id }) }}">
-                                <span class="glyphicon glyphicon-chevron-left"></span> Previous Lecture
-                            </a>
-                        </div>
-                    {% endif %}
-                    {% if next %}
-                        <div class="btn-group" role="group">
-                            <a class="btn btn-info" href="{{ path('course_lecture_show', { 'id': next.id, 'courseId': course.id }) }}">
-                                Next Lecture <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                        </div>
-                    {% endif %}
+            {% if prev or next%}
+                <div class="col-xs-12">
+                    <div class="btn-group btn-group-justified" role="group">
+                        {% if prev %}
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-info" href="{{ path('course_lecture_show', { 'id': prev.id, 'courseId': course.id }) }}">
+                                    <span class="glyphicon glyphicon-chevron-left"></span> Previous Lecture
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if next %}
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-info" href="{{ path('course_lecture_show', { 'id': next.id, 'courseId': course.id }) }}">
+                                    Next Lecture <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <hr/>
                 </div>
-                <hr/>
-            </div>
+            {% endif %}
             <div class="col-xs-12">
                 <h2>Lecture comments</h2>
                 <hr/>

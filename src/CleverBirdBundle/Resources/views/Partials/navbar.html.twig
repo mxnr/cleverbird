@@ -1,60 +1,59 @@
-{% block navbar %}
-    <div class="container">
-        <div class="header clearfix">
-            <nav>
-                <ul class="nav nav-pills pull-right">
-                    {% if app.user and app.user.id%}
-                        <li role="presentation">
-                            <a href="{{ path('course_index') }}">
-                                <span class="glyphicon glyphicon-education"></span> My Courses
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a href="{{ path('courses_list') }}">
-                                <span class="glyphicon glyphicon-book"></span> Public Courses
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a href="{{ path('calendar') }}">
-                                <span class="glyphicon glyphicon-calendar"></span> Calendar
-                            </a>
-                        </li>
-                        <li role="presentation" class="dropdown">
-                            <a class="dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#"
-                               role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">
-                                <img src="{{ app.user.avatar }}&s=40" width="20" height="20"/> {{ app.user.username -}}
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ path('group_index') }}">Groups</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{{ path('profile', { 'id': app.user.id }) }}">Profile</a></li>
-                                <li><a href="#">Settings</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{{ path('logout') }}?" role="button">Logout</a></li>
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li role="presentation">
-                            <a href="{{ path('login') }}" role="button">Login</a>
-                        </li>
-                        <li role="presentation" class="active">
-                            <a href="{{ path('registration') }}" role="button">Sign Up</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-            {#<img src="{{ asset('bundles/cleverbird/img/logo.png') }}" alt="Clever Bird" height="50"/>#}
-            <a href="{{ path('clever_bird_homepage') }}">
 
-                <h3 class="text-muted">
-                    Clever Bird
-                </h3>
-            </a>
-        </div>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                {% if app.user and app.user.id%}
+                    <li role="presentation">
+                        <a href="{{ path('course_index') }}">
+                            <span class="glyphicon glyphicon-education"></span> My Courses
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="{{ path('courses_list') }}">
+                            <span class="glyphicon glyphicon-book"></span> Public Courses
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="{{ path('calendar') }}">
+                            <span class="glyphicon glyphicon-calendar"></span> Calendar
+                        </a>
+                    </li>
+                    <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           href="#"
+                           role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            <img src="{{ app.user.avatar }}&s=40" width="20" height="20"/> {{ app.user.username -}}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('group_index') }}">Groups</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ path('profile', { 'id': app.user.id }) }}">Profile</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ path('logout') }}?" role="button">Logout</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li role="presentation">
+                        <a href="{{ path('login') }}" role="button">Login</a>
+                    </li>
+                    <li role="presentation" class="active">
+                        <a href="{{ path('registration') }}" role="button">Sign Up</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {#<img src="{{ asset('bundles/cleverbird/img/logo.png') }}" alt="Clever Bird" height="50"/>#}
+        <a href="{{ path('clever_bird_homepage') }}">
+
+            <h3 class="text-muted">
+                Clever Bird
+            </h3>
+        </a>
     </div>
-{% endblock %}
+</div>

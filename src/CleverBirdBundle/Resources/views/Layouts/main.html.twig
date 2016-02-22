@@ -27,7 +27,9 @@
 </head>
 
 <body>
-{% include '@CleverBird/Partials/navbar.html.twig' %}
+{% block navbar %}
+    {% include '@CleverBird/Partials/navbar.html.twig' %}
+{% endblock %}
 {% if app.session.flashbag.keys > 0 %}
     <div class="container">
         {% for type, messages in app.session.flashbag.all %}
@@ -41,11 +43,17 @@
     </div>
 {% endif %}
 {% block body %}{% endblock %}
-<div class="container">
-    <footer class="footer">
-        <p>&copy; {{ 'now'|date('Y') }} Muffin Man. Project created on <a href="https://koding.com">koding</a> hackathon.</p>
-    </footer>
-</div>
+{% block footer %}
+    <div class="container">
+        <footer class="footer">
+            <p>
+                &copy; {{ 'now'|date('Y') }} <a href="mailto:moxnrl@gmail.com">Muffin Man</a>,
+                with his <a href="https://www.instagram.com/p/BBKpq-VvE45/?taken-by=mxnr">dog</a>.
+                Project created on <a href="https://koding.com">koding</a> hackathon.
+            </p>
+        </footer>
+    </div>
+{% endblock %}
 {% block javascripts %}
     {% javascripts
         'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'

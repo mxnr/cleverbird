@@ -1,6 +1,11 @@
 course_lecture_show:
     path:     /{id}/show
-    defaults: { _controller: "CleverBirdBundle:Lecture:show" }
+    defaults: { _controller: "CleverBirdBundle:Lecture:show", light: false }
+    methods:  GET
+
+course_lecture_show_light:
+    path:     /{id}/show.light
+    defaults: { _controller: "CleverBirdBundle:Lecture:show", light: true }
     methods:  GET
 
 course_lecture_new:

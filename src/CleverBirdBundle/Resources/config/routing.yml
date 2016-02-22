@@ -19,7 +19,12 @@ clever_bird_homepage:
 
 courses_list:
     path: /courses-list
-    defaults: { _controller: CleverBirdBundle:Default:coursesList }
+    defaults: { _controller: CleverBirdBundle:Default:coursesList, light: false }
+    methods:   [GET]
+
+courses_list_light:
+    path: /courses-list.light
+    defaults: { _controller: CleverBirdBundle:Default:coursesList, light: true }
     methods:   [GET]
 
 calendar:

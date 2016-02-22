@@ -1,0 +1,22 @@
+{% extends '@CleverBird/Layouts/main.light.twig' %}
+{% block body %}
+{% spaceless %}
+    <h1>Courses list</h1>
+    {% if courses %}
+        <table style="border: 1px solid #ebebeb">
+            {% for course in courses %}
+                <tr>
+                    <td {% if not loop.first %}style="border-top: 1px solid #ebebeb"{% endif %}>
+                        <a href="{{ path('course_show_light', { 'id': course.id }) }}">
+                            <h2>{{ course.name }}</h2>
+                        </a>
+                        {{- course.description -}}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2>Currently we didn't have any courses:(</h2>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}

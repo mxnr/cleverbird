@@ -24,7 +24,7 @@ class LectureController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Lecture $lecture)
+    public function showAction(Lecture $lecture, $light)
     {
         if (!$lecture) {
             throw $this->createNotFoundException('This lecture does not exists!');
@@ -34,11 +34,11 @@ class LectureController extends Controller
         $deleteForm = $this->createDeleteForm($lecture, $course);
 
         $next = $this->getRep('CleverBirdBundle:Lecture')
-            ->getNextLecture($lecture->getId());
+            ->getNextLecture($lecture->getId(), $course);
         $prev = $this->getRep('CleverBirdBundle:Lecture')
-            ->getPrevLecture($lecture->getId());
+            ->getPrevLecture($lecture->getId(), $course);
 
-        return $this->render('@CleverBird/Lecture/show.html.twig', [
+        return $this->render('@CleverBird/Lecture/show.'.($light ? 'light' : 'html').'.twig', [
             'next' => $next,
             'prev' => $prev,
             'course' => $course,

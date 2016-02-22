@@ -1,0 +1,58 @@
+{% extends '@CleverBird/Layouts/main.light.twig' %}
+{% block body %}
+    {% spaceless %}
+        <h1>{{- course.name -}}</h1>
+        <table style="border: 1px solid #ebebeb">
+            <tr>
+                <td style="border-right: 1px solid #ebebeb;padding:15px">
+                    <span>
+                        <strong>Course author:</strong>
+                        <a href="{{ path('profile', { 'id': course.user.id }) }}" class="author-name">
+                            {{- course.user.username -}}
+                        </a>
+                    </span>
+                </td>
+                <td style="border-right: 1px solid #ebebeb;padding:15px">
+                    <strong>Course type:</strong>
+                        {% if course.type == 1 %}
+                            <span>Self-Paced Course</span>
+                        {% elseif course.type == 2 %}
+                            <span>Time Driven Course, starts at {{ course.startDate | date('m/d/y') }}</span>
+                        {% else %}
+                            <span>Finished Course, finished at {{ course.endDate | date('m/d/y') }}</span>
+                        {% endif %}
+                </td>
+                <td style="border-right: 1px solid #ebebeb;padding:15px">
+                    <strong>Created:</strong> {{ course.created | date }}
+                </td>
+                {% if course.participants.values > 0 %}
+                <td style="border-right: 1px solid #ebebeb;padding:15px">
+                    <strong>Course participants:</strong> {{ course.participants.values|length }}
+                </td>
+                {% endif %}
+            </tr>
+        </table>
+
+        {% if not app.user.enrolled(course) %}
+            <hr/>
+            <a href="{{ path('course_enroll', { 'id': course.id }) }}" class="btn btn-success btn-large btn-block">
+                Enroll to this Course right now!
+            </a>
+        {% endif %}
+        <hr/>
+        <p>{{ course.description | nl2br }}</p>
+
+        {% if course.lectures|length > 0 and app.user.enrolled(course) %}
+            <hr/>
+            <h2>Course Lectures</h2>
+                <ul>
+                    {% for lecture in course.lectures %}
+                        <ol>
+                            <a href="{{ path('course_lecture_show_light', {'id': lecture.id, 'courseId': course.id}) }}"
+                               class="list-group-item">{{ lecture.title }}</a>
+                        </ol>
+                    {% endfor %}
+                </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

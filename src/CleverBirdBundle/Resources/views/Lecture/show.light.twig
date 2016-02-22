@@ -1,0 +1,29 @@
+{% extends '@CleverBird/Layouts/main.light.twig' %}
+{% block body %}
+    {% spaceless %}
+        <p>
+            <strong>Lecture created on:</strong> {{ lecture.created | date }}
+        </p>
+        <h3>
+            <a href="{{ path('course_show', {'id': course.id}) }}">{{ course.name }}</a>
+        </h3>
+        <h1>{{ lecture.title }}</h1>
+        <hr/>
+        {% autoescape 'html' %}
+            {{ lecture.text | striptags('iframe img') | raw }}
+        {% endautoescape %}
+        <hr/>
+        {% if prev or next%}
+            {% if prev %}
+                <a href="{{ path('course_lecture_show_light', { 'id': prev.id, 'courseId': course.id }) }}">
+                    Previous Lecture "{{ prev.title }}"
+                </a>
+            {% endif %}
+                {% if next %}
+                    <a href="{{ path('course_lecture_show_light', { 'id': next.id, 'courseId': course.id }) }}">
+                        Next Lecture "{{ next.title }}"
+                    </a>
+                {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

@@ -20,8 +20,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <h1 class="m-top-0">Courses list</h1>
+            <div class="col-xs-12">
+                <h1 class="m-top-0">
+                    Courses list
+                    <a href="{{ path('courses_list_light') }}"
+                       class="btn btn-default btn-xs pull-right"
+                       data-toggle="tooltip"
+                       data-placement="bottom"
+                       title="Browse light version">
+                        <span class="glyphicon glyphicon-leaf"></span>
+                    </a>
+                </h1>
             </div>
         </div>
         <hr/>

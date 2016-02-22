@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description"
+          content="Educational platform with an extended contribution option and a lighter version for users from the less developed countries.">
+    <meta name="author" content="Dmitry Semenov<moxnrl@gmail.com>">
+    <title>{% block title %}CleverBird platform{% endblock %}</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                <a href="{{ path('courses_list_light') }}">Public Courses</a>
+            </td>
+        </tr>
+    </table>
+    {% block body %}{% endblock %}
+    <p>&copy; {{ 'now'|date('Y') }} Muffin Man. Project created on <a href="https://koding.com">koding</a> hackathon.</p>
+</body>
+</html>

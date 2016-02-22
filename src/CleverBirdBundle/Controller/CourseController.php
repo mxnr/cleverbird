@@ -74,7 +74,7 @@ class CourseController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Course $course)
+    public function showAction(Course $course, $light)
     {
         if (!$course) {
             throw $this->createNotFoundException('This course does not exists!');
@@ -82,7 +82,7 @@ class CourseController extends Controller
 
         $deleteForm = $this->createDeleteForm($course);
 
-        return $this->render('CleverBirdBundle:Course:show.html.twig', [
+        return $this->render('CleverBirdBundle:Course:show.'.($light ? 'light' : 'html').'.twig', [
             'course' => $course,
             'delete_form' => $deleteForm->createView(),
         ]);

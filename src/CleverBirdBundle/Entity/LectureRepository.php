@@ -24,12 +24,14 @@ class LectureRepository extends EntityRepository
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getPrevLecture($id)
+    public function getPrevLecture($id, Course $course)
     {
         $query = $this->getRep()->createQueryBuilder('l')
             ->where('l.id < :id')
+            ->andWhere('l.course = :course')
             ->andWhere('l.type = :type')
             ->setParameter('id', $id)
+            ->setParameter('course', $course)
             ->setParameter('type', LectureStatuses::AVAILABLE)
             ->orderBy('l.id', 'desc')
             ->setMaxResults(1);
@@ -44,12 +46,14 @@ class LectureRepository extends EntityRepository
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getNextLecture($id)
+    public function getNextLecture($id, Course $course)
     {
         $query = $this->getRep()->createQueryBuilder('l')
             ->where('l.id > :id')
+            ->andWhere('l.course = :course')
             ->andWhere('l.type = :type')
             ->setParameter('id', $id)
+            ->setParameter('course', $course)
             ->setParameter('type', LectureStatuses::AVAILABLE)
             ->orderBy('l.id', 'asc')
             ->setMaxResults(1);

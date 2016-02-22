@@ -22,10 +22,10 @@ class DefaultController extends Controller
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function coursesListAction()
+    public function coursesListAction($light)
     {
         return $this->render(
-            '@CleverBird/Default/courses-list.html.twig',
+            '@CleverBird/Default/courses-list.'.($light ? 'light' : 'html').'.twig',
             [
                 'courses' => $this->getRep('CleverBirdBundle:Course')
                     ->findBy(

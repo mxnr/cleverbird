@@ -3,7 +3,9 @@ $(window).on("load", function() {
     if (grid.length > 0) {
         grid.masonry({
             // options
-            itemSelector: '.grid-item'
+            itemSelector: '.grid-item',
+            columnWidth: '.grid-item',
+            isFitWidth: true
         });
     }
 });

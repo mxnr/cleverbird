@@ -41,16 +41,18 @@
                         <div role="tabpanel" class="tab-pane" id="teach">
                             <h2>Start to Teach</h2>
                             {% if app.user.courses %}
-                                {% for course in app.user.courses %}
-                                    <tr>
-                                        <td>
-                                            <a href="{{ path('course_show', {'id': course.id }) }}">{{ course.name }}</a>
-                                        </td>
-                                        <td>
-                                            <span class="label label-default">{{ course.created | date }}</span>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
+                                <table class="table table-bordered table-responsive table-hover">
+                                    {% for course in app.user.courses %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path('course_show', {'id': course.id }) }}">{{ course.name }}</a>
+                                            </td>
+                                            <td>
+                                                <span class="label label-default">{{ course.created | date }}</span>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
                             {% else %}
                                 <div class="alert alert-info">
                                     <strong>Heads up!</strong> Currently you do not create any courses.

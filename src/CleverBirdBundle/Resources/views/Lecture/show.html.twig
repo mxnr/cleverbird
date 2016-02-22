@@ -45,9 +45,7 @@
             </p>
 
             <div class="lecture-text">
-                {% autoescape 'html' %}
-                    {{ lecture.text | raw }}
-                {% endautoescape %}
+                {{ lecture.text | raw }}
                 <hr/>
             </div>
             {% if prev or next%}
